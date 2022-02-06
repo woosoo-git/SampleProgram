@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SampleProgram"
+        xmlns:control="clr-namespace:SampleProgram.Controls.View"
         mc:Ignorable="d"
         Title="{Binding ProgramTitle}" Height="450" Width="800">
 
@@ -17,10 +18,16 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" x:Name="gridMenu">
-            <StackPanel Orientation="Horizontal" Margin="5">
+        <Grid Grid.Row="0" x:Name="gridMenu" Background="#fbe0c4">
+            <StackPanel Orientation="Horizontal" Margin="4">
                 <Button Content="라이브차트 샘플" Style="{DynamicResource MenuButtonStyle}"/>
+                <Button Content="데이터그리드뷰 샘플" Style="{DynamicResource MenuButtonStyle}"/>
             </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <control:LiveChartControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="Visible"/>
+            
         </Grid>
     </Grid>
 </Window>

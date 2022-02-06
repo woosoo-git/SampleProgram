@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="SampleProgram.Controls.View.LiveChartControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SampleProgram.Controls.View"
+             xmlns:viewModel="clr-namespace:SampleProgram.Controls.ViewModel"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <viewModel:LiveChartControlViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Style="{DynamicResource ChartBorderStyle}">
+            <lvc:CartesianChart Margin="15">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis>
+                        <lvc:Axis.Separator>
+                            <lvc:Separator Step="1"/>
+                        </lvc:Axis.Separator>
+                        <lvc:Axis.MinValue>0</lvc:Axis.MinValue>
+                        <lvc:Axis.MaxValue>11</lvc:Axis.MaxValue>
+                    </lvc:Axis>
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis MinValue="0" MaxValue="100"/>
+                </lvc:CartesianChart.AxisY>
+                <lvc:CartesianChart.Series>
+                    <lvc:LineSeries Foreground="PaleVioletRed" Title="내 점수" Values="{Binding MyScore, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <lvc:LineSeries Foreground="CornflowerBlue" Title="평균 점수" Values="{Binding AvgScore, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </lvc:CartesianChart.Series>
+            </lvc:CartesianChart>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Style="{DynamicResource ChartBorderStyle}">
+                <lvc:PieChart Series="{Binding StudyTimes, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="15"/>
+            </Border>
+
+            <Border Grid.Column="1" Style="{DynamicResource ChartBorderStyle}">
+                <lvc:CartesianChart Margin="15">
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis Labels="{Binding SubjectName}"/>
+
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis MinValue="0" MaxValue="100"/>
+                    </lvc:CartesianChart.AxisY>
+                    <lvc:CartesianChart.Series>
+                        <lvc:ColumnSeries Values="{Binding SubjectScore, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Fill="Gray"/>
+                    </lvc:CartesianChart.Series>
+                </lvc:CartesianChart>
+            </Border>
+            
+        </Grid>
+    </Grid>
+</UserControl>
